@@ -13,7 +13,7 @@ class FormationRepository extends \Doctrine\ORM\EntityRepository
 
 	public function compterNombreSession(){
 		return $this->createQueryBuilder('f')
-		->select('f.id,f.intitule,f.description, count(s.formation) as nombre')
+		->select('f.id,f.intitule,f.description,f.intitule, count(s.formation) as nombre')
 		->leftJoin('FormationBundle\Entity\Session', 's' , 'WITH' , 's.formation = f.id')  
 		->groupBy('f.intitule')
 		->getQuery()

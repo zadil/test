@@ -19,7 +19,7 @@ class SessionController extends Controller
     public function listerAction(Formation $formation, Request $request)
     {
         
-        $listeSession = $this->getDoctrine()->getManager()->getRepository('FormationBundle:Session')->findAll();
+        $listeSession = $this->getDoctrine()->getManager()->getRepository('FormationBundle:Session')->listerSessionByIntitule($formation->getIntitule());
         $personne = new Personne();
         $session = $request->getSession();
         if( $session->get('id') != null)
