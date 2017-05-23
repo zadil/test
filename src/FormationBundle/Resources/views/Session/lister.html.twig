@@ -22,8 +22,11 @@
 {% if personne in session.personnes %}
 <span class="glyphicon glyphicon-thumbs-up"> ({{ session.personnes |length }})</span></a>
 {% else %}
-
- <a href={{ path('candidaterSession', {'personneId' : app.session.get('id') ,'sessionId' : session.id })}}><span class="glyphicon glyphicon-thumbs-up"> ({{ session.personnes |length }})</span></a>
+{% if app.session.get('id') != null %}
+  <a href={{ path('candidaterSession', {'personneId' : app.session.get('id') ,'sessionId' : session.id })}}><span class="glyphicon glyphicon-thumbs-up"> ({{ session.personnes |length }})</span></a>
+{% else %}
+({{ session.personnes |length }})
+ {% endif %}
  {% endif %}
  </td><td><a href={{ path("editerSession" , {"id" : session.id})}}>editer</a></td></tr>
 

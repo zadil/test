@@ -19,10 +19,13 @@ class SessionController extends Controller
     public function listerAction(Formation $formation, Request $request)
     {
         
-        $listeSession = $this->getDoctrine()->getManager()->getRepository('FormationBundle:Session')->findAll();
+        $listeSession = $this->getDoctrine()->getManager()->getRepository('FormationBundle:Session')->listerSessionByIntitule($formation->getIntitule());
         $personne = new Personne();
         $session = $request->getSession();
+        if( $session->get('id') != null)
+        {
         $personne = $this->getDoctrine()->getManager()->getRepository('PersonneBundle:Personne')->find($session->get('id'));
+        }
         return $this->render('FormationBundle:Session:lister.html.twig', array("listeSession" => $listeSession, 'formation' => $formation, 'personne' => $personne,
             // ...
         ));

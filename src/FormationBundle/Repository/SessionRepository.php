@@ -19,4 +19,15 @@ class SessionRepository extends \Doctrine\ORM\EntityRepository
 		->getResult();
 
 	}
+
+	public function listerSessionByIntitule($nom){
+		return $this->createQueryBuilder('s')
+		->select('s')
+		->join('s.formation', 'f') 
+		->andWhere('f.intitule = :nom')
+		->setParameter('nom' , $nom)
+		->getQuery()
+		->getResult();
+
+	}
 }
