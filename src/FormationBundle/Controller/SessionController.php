@@ -16,11 +16,14 @@ class SessionController extends Controller
     /**
      * @Route("/session/lister/{id}" , name ="listerSession")
      */
-    public function listerAction(Formation $formation)
+    public function listerAction(Formation $formation, Request $request)
     {
         
         $listeSession = $this->getDoctrine()->getManager()->getRepository('FormationBundle:Session')->findAll();
-        return $this->render('FormationBundle:Session:lister.html.twig', array("listeSession" => $listeSession, 'formation' => $formation, 
+        $personne = new Personne();
+        $session = $request->getSession();
+        $personne = $this->getDoctrine()->getManager()->getRepository('PersonneBundle:Personne')->find($session->get('id'));
+        return $this->render('FormationBundle:Session:lister.html.twig', array("listeSession" => $listeSession, 'formation' => $formation, 'personne' => $personne,
             // ...
         ));
     }
