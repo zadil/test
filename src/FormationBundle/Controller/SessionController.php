@@ -22,7 +22,10 @@ class SessionController extends Controller
         $listeSession = $this->getDoctrine()->getManager()->getRepository('FormationBundle:Session')->findAll();
         $personne = new Personne();
         $session = $request->getSession();
+        if( $session->get('id') != null)
+        {
         $personne = $this->getDoctrine()->getManager()->getRepository('PersonneBundle:Personne')->find($session->get('id'));
+        }
         return $this->render('FormationBundle:Session:lister.html.twig', array("listeSession" => $listeSession, 'formation' => $formation, 'personne' => $personne,
             // ...
         ));
