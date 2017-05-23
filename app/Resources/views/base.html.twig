@@ -30,7 +30,8 @@
           </li>
           
           <li class="nav-header">
-            <a href={{ path('recherchePersonne')}} ><div class="link"><h5>Membres</h5><i class="fa fa-chevron-down"></i></div></a>
+            {% if  app.session.get('id') != null %} <a href={{ path('recherchePersonne')}} ><div class="link"><h5>Membres</h5><i class="fa fa-chevron-down"></i></div></a>
+            {% endif %}
           </li>
           
           <li class="nav-header">

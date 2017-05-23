@@ -50,7 +50,7 @@ class GestionPersonneController extends Controller
             $em->persist($memo);
             $em->flush();
 
-            return $this->redirectToRoute('showPersonne', array("id" => $personne->getId(), 
+            return $this->redirectToRoute('showPersonne', array("id" => $personne->getId(),'page' => '0'
             // ...
         ));
 

@@ -25,6 +25,7 @@ class MemoRepository extends \Doctrine\ORM\EntityRepository
 		->select('m')
 		->setMaxResults(5)
         ->setFirstResult($page)
+        ->orderBy('m.id', 'DESC')
 		->getQuery()
 		->getResult();
 

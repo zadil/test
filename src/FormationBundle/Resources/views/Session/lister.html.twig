@@ -18,7 +18,14 @@
 <tbody>
 {%for session in listeSession %}
 
-<tr><td>{{session.dateDebut|date("m/d/Y")}}</td><td>{{session.dateFin|date("m/d/Y")}}</td><td><a href={{ path("supprimerFormation", {'id' : session.id})}}><span class="glyphicon glyphicon-remove"></span></a></td><td><a href={{ path('candidaterSession', {'personneId' : app.session.get('id') ,'sessionId' : session.id })}}><span class="glyphicon glyphicon-thumbs-up"> ({{ session.personnes |length }})</span></a></td><td><a href={{ path("editerSession" , {"id" : session.id})}}>editer</a></td></tr>
+<tr><td>{{session.dateDebut|date("m/d/Y")}}</td><td>{{session.dateFin|date("m/d/Y")}}</td><td><a href={{ path("supprimerFormation", {'id' : session.id})}}><span class="glyphicon glyphicon-remove"></span></a></td><td>
+{% if personne in session.personnes %}
+<span class="glyphicon glyphicon-thumbs-up"> ({{ session.personnes |length }})</span></a>
+{% else %}
+
+ <a href={{ path('candidaterSession', {'personneId' : app.session.get('id') ,'sessionId' : session.id })}}><span class="glyphicon glyphicon-thumbs-up"> ({{ session.personnes |length }})</span></a>
+ {% endif %}
+ </td><td><a href={{ path("editerSession" , {"id" : session.id})}}>editer</a></td></tr>
 
 {% endfor %}
 </tbody>

@@ -29,7 +29,7 @@ class MemoController extends Controller
             $em= $this->getDoctrine()->getManager();
             $em->persist($memo);
             $em->flush();
-            return $this->redirectToRoute('showPersonne', array('id' => $personne->getId(),
+            return $this->redirectToRoute('listeMemos', array('page' => '0',
             // ...
         ));
 
@@ -53,7 +53,7 @@ class MemoController extends Controller
             $em= $this->getDoctrine()->getManager();
             $em->persist($memo);
             $em->flush();
-            return $this->redirectToRoute('listeMemos', array(
+            return $this->redirectToRoute('listeMemos', array('page' => '0'
             // ...
         ));
 
@@ -74,7 +74,7 @@ class MemoController extends Controller
         $em->remove($memo);
         $em->flush();
 
-        return $this->redirectToRoute('listeMemos', array(
+        return $this->redirectToRoute('listeMemos', array('page' => '0',
             // ...
         ));
     }
