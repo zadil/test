@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}FormationBundle:Formation:lister{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="panel panel-info" style="margin-top:20px;">
+<div class="panel-heading" >
+<div class="panel-title"><span class="glyphicon glyphicon-book"></span>
+</div>
+</div>
+<div class="panel-body"  >
+<div class="row">
+<table class="table">
+<tr><th>intitulé</th><th>description</th><th><span class="glyphicon glyphicon-trash"></span></th><th>Nombre de sessions</th><th>editer</th></tr>
+{% for formation in listeFormation %}
+
+<tr><td>{{formation.intitule}}</td><td>{{formation.description}}</td><td><a href={{ path("supprimerFormation", {'id' : formation.id})}}><span class="glyphicon glyphicon-remove"></span></a></td><td><a href={{ path('listerSession', { 'id': formation.id})}}>{{ formation.nombre}}</a></td><td><a href={{ path("editerFormation" , {"id" : formation.id})}}>editer</a></td></tr>
+
+{% endfor %}
+</table>
+
+</div>
+	<a href={{ path("insererFormation")}}><span class="glyphicon glyphicon-plus"></span></a>
+</div>
+</div>
+{% endblock %}

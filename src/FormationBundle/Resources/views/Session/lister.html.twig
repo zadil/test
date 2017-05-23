@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}FormationBundle:Session:lister{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="panel panel-info" style="margin-top:20px;">
+<div class="panel-heading" >
+<div class="panel-title"><span class="glyphicon glyphicon-book"> formation : {{formation.intitule | upper }}</span>
+</div>
+</div>
+<div class="panel-body"  >
+<div class="row">
+<table class="col-sm-4 table table-striped">
+<thead class="thead-default">
+<tr><th>date de debut</th><th>date de fin</th><th><span class="glyphicon glyphicon-trash"></span></th><th>candidater</th><th>editer</th></tr>
+</thead>
+<tbody>
+{%for session in listeSession %}
+
+<tr><td>{{session.dateDebut|date("m/d/Y")}}</td><td>{{session.dateFin|date("m/d/Y")}}</td><td><a href={{ path("supprimerFormation", {'id' : session.id})}}><span class="glyphicon glyphicon-remove"></span></a></td><td><a href={{ path('candidaterSession', {'personneId' : app.session.get('id') ,'sessionId' : session.id })}}><span class="glyphicon glyphicon-thumbs-up"> ({{ session.personnes |length }})</span></a></td><td><a href={{ path("editerSession" , {"id" : session.id})}}>editer</a></td></tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+</div>
+	<a href={{ path("insererSession", {'id' : formation.id })}}><span class="glyphicon glyphicon-plus"></span></a>
+</div>
+</div>
+{% endblock %}

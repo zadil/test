@@ -1,0 +1,40 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="panel panel-info" style="margin-top:20px;">
+<div class="panel-heading" >
+<div class="panel-title">
+<div class="input-group">
+<div class="input-group-addon">
+{{ form_start(form) }}
+{{ form_widget(form.recherche , { 'attr' : {'placeholder': 'recherche nom et prénom'}})}}
+</div>
+<div class="input-group-addon">
+{{ form_widget(form.rechercher)}}
+</div>
+{{ form_end(form) }}
+</div>
+</div>
+</div>
+<div class="panel-body"  >
+<div class="row">
+<table class="table">
+<tr><th class="col-sm-1"><span class="glyphicon glyphicon-user"></span></th><th class="col-sm-1">Nom</th><th class="col-sm-1">Prenom</th><th class="col-sm-1"><span class="glyphicon glyphicon-trash"></span></th><th class="col-sm-1"><span class="glyphicon glyphicon-envelope"></span></th><th class="col-sm-1"><span class="glyphicon glyphicon-comment"></span></th><th class="col-sm-1">Ville</th></tr>
+
+{%for personne in listePersonne %}
+
+<tr><td class="col-sm-1"><img src="{{ asset(personne.photo)}}" width="40px" height="40px"/></td><td>{{personne.nom}}</td><td>{{personne.prenom}}</td><td><a class="text-danger" href={{ path("supprimerPersonne", {'id' : personne.id})}}><span class="glyphicon glyphicon-remove"></span></a></td><td><a href={{ path("afficherDetail" , {"id" : personne.id})}}>{{personne.email}}</a></td><td><a href={{ path("insererMemo" , {"id" : personne.id})}}><span class="glyphicon glyphicon-pencil"></span></a></td><td>{{personne.ville }}</td></tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+	<a href={{ path("insererPersonne")}}><span class="glyphicon glyphicon-user"></span>+</a>
+</div>
+</div>
+
+
+{% endblock %}

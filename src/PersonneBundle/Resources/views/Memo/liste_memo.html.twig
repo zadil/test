@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}PersonneBundle:Memo:listeMemo{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="panel panel-info" style="margin-top:20px;">
+<div class="panel-heading" >
+<div class="panel-title">
+<div class="input-group">
+<div class="input-group-addon">
+<span class="glyphicon glyphicon-inbox"></span>
+</div>
+<div class="input-group-addon">
+{{ form_start(form) }}
+{{ form_widget(form.recherche, {'attr':{'class':'form-control','placeholder':'recherche par mot clef'}})}}
+</div>
+<div class="input-group-addon">
+{{ form_widget(form.rechercher)}}
+</div>
+{{ form_end(form) }}
+</div>
+</div>
+</div>
+<div class="panel-body"  >
+<div class="row">
+<table class="table">
+<tr><th class="col-sm-1">Message</th><th class="col-sm-1">DateCreation</th><th class="col-sm-1"><span class="glyphicon glyphicon-trash"></span></th><th class="col-sm-1"> TO <span class="glyphicon glyphicon-user"></span></th><th class="col-sm-1"><span class="glyphicon glyphicon-list-alt" ></span></th></tr>
+
+{% for memo in paginationMemos %}
+
+<tr><td>{{memo.contenu}}</td><td>{{memo.dateCreation | date ('d/M/Y h:m:s')}}</td><td><a class="text-danger" href={{ path("supprimerMemo", {'id' : memo.id})}}><span class="glyphicon glyphicon-remove"></span></a></td><td>{{memo.personne.nom | capitalize}} {{memo.personne.prenom | capitalize}}</td>
+<td>{% if memo.fait != 0 %} 
+<span class="glyphicon glyphicon-check"></span>
+{% else %}
+<a href={{ path("editerMemo", {"id" : memo.id})}}><span class="glyphicon glyphicon-unchecked"></span></a>
+{% endif %}
+</td></tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+</div>
+<div class="panel-footer"  >
+<p style="text-align : center ;">
+{% for page in 0..((listeMemos|length) /5)|round(0,'floor') %}
+	<a href={{ path('listeMemos', {'page' : page})}}> {{page+1}} </a>
+{% endfor %}
+</p>
+</div>
+{% endblock %}

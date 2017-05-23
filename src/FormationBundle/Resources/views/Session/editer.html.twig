@@ -1,0 +1,60 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}FormationBundle:Session:editer{% endblock %}
+
+{% block body %}
+<div class="container">
+<div style="margin-top:80px;" class="mainbox col-md-8 col-sm-10">                    
+<div class="panel panel-info" >
+<div class="panel-heading">
+<div class="panel-title"><span class="glyphicon glyphicon-book"> {{ session.formation.intitule | upper }}</span></div>
+</div>
+<div style="padding-top:30px ; padding-left: 40px ;" class="panel-body"  >
+<!-- <div>
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+ {{ form_start(form) }}
+
+  {# Les erreurs générales du formulaire. #}
+  {{ form_errors(form) }}
+
+  {# Génération du label + error + widget pour un champ. #}
+
+  {# Génération manuelle et éclatée : #}
+  <div class="form-group">
+    {# Génération du label. #}
+   
+
+    {# Affichage des erreurs pour ce champ précis. #}
+   
+
+      {# Génération de l'input. #}
+      {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+    </div>
+ 
+    
+  
+	<div class="form-group">
+    {# Affichage des erreurs pour ce champ précis. #}
+      {{ form_widget(form.dateFin, {'attr': {'class': 'form-control' , 'placeholder' : "MM/DD/YYY" }}) }}
+    </div>
+    
+  
+  <div class="form-group">
+    {{ form_widget(form.enregistrer, {'attr' : {'class' : 'btn-group  btn-info', 'role' : 'group'}}) }} <a class = "btn-group btn-info" role="group" href= {{ path('connexion')}} ><span class="glyphicon glyphicon-remove"></span> </a>
+  </div>
+  {{ form_end(form) }}
+  </div> -->
+  <table class="table">
+  <td><td>Session => </td><td>date début : {{ session.dateDebut | date('d/M/Y')}}</td><td>date fin : {{ session.dateFin | date('d/M/Y')}}</td></table>
+  <h1 style="font-size: 1.4em; padding-left: 20px;">Candidats</h1>
+  <table class="table">
+  <tr><th>Nom</th><th>Prenom</th><th><span class="glyphicon glyphicon-envelope"></span></th></tr>
+  {% for personne in session.personnes %}
+  	<tr><td>{{personne.nom}}</td><td>{{personne.prenom}}</td><td>{{personne.email}}</td></tr>
+  {% endfor %}
+  </table
+  </div>
+
+{% endblock %}

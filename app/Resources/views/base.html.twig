@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Bienvenue sur le site de l'exercice{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet"
+            href="{{ asset('assets/vendor/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet"
+            href="{{ asset("bundles/personne/css/menu.css") }}" />
+        <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+    <div class="wrap">
+  <nav class="nav-bar navbar-inverse" role="navigation">
+      <div id ="top-menu" class="container-fluid active">
+          <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home"> {{ app.session.get('nom') | upper }}  {{ app.session.get('prenom') | capitalize }}</span></a>
+          <ul class="nav navbar-nav">        
+              <li><a class=" white-bg"  href= {{ path('connexion') }}><span class="glyphicon glyphicon-log-in"></span></a></li>
+              <li><a class=" white-bg" href=""><span class="glyphicon glyphicon-log-out"></span></a></li>                      
+          </ul>
+      </div>      
+  </nav>
+  <aside id="side-menu" class="aside" role="navigation">            
+        <ul class="nav nav-list accordion">                    
+          <li class="nav-header">
+             <a href={{ path('listeMemos')}} ><div class="link">Memos<i class="fa fa-chevron-down"></i></div></a>
+          </li>
+          
+          <li class="nav-header">
+            <a href={{ path('recherchePersonne')}} ><div class="link"><h5>Membres</h5><i class="fa fa-chevron-down"></i></div></a>
+          </li>
+          
+          <li class="nav-header">
+            <a href={{ path('listerFormation') }} ><div class="link"><h5>Formations</h5><i class="fa fa-chevron-down"></i></div></a>
+          </li>  
+          
+          <li class="nav-header">
+            <div class="link">Divers<i class="fa fa-chevron-down"></i></div>
+            <ul class="submenu">
+              <li><a href="#"></li> 
+              <li><a href="#"></a></li> 
+              <li><a href="#"></a></li>          
+              <li><a href="#"></a></li>
+            </ul>
+          </li>
+          
+      </ul>
+  </aside>
+     <div class="content">
+   
+    <section class="content-inner">
+     {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+    </section>
+  </div>    
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}PersonneBundle:Memo:insererMemo{% endblock %}
+
+{% block body %}
+<div class="container">
+<div style="margin-top:80px;" class="mainbox col-md-5  col-sm-7 ">                    
+<div class="panel panel-info" >
+<div class="panel-heading">
+<div class="panel-title"><span class="glyphicon glyphicon-user"> {{ personne.nom | capitalize }} {{personne.prenom | capitalize}}</span></div>
+</div>
+<div style="padding-top:30px ; padding-left: 40px ;" class="panel-body"  >
+<div class="row">
+
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+ {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+  {# Les erreurs générales du formulaire. #}
+  {{ form_errors(form) }}
+
+  {# Génération du label + error + widget pour un champ. #}
+
+  {# Génération manuelle et éclatée : #}
+  <div class="form-group">
+    {# Génération du label. #}
+   
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.contenu) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.contenu, {'attr': {'class': 'form-control' , 'placeholder': 'Votre message'}}) }}
+    </div>
+  </div>
+  <div class="form-group">
+    {# Génération du label. #}
+  
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.fait) }}
+
+    <div class="col-sm-10">
+      {# Génération de l'input. #}
+      {{ form_widget(form.fait, {'attr': {'class': 'form-control' }}) }}
+    </div>
+  </div>
+  
+  <div>
+    {{ form_widget(form.enregistrer, {'attr' : {'class' : 'btn-group  btn-info', 'role' : 'group'}}) }} <a class = "btn-group btn-info" role="group" href= {{ path('connexion')}} ><span class="glyphicon glyphicon-remove"></span> </a>
+  </div>
+  {{ form_end(form) }}
+  </div>
+  </div>
+{% endblock %}

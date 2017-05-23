@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}afficherles mémos{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+<div class="panel panel-info" style="margin-top:20px;">
+<div class="panel-heading" >
+<div class="panel-title">
+<table class="table">
+<tr><td>{{personne.nom | upper }}</td><td>{{personne.prenom | capitalize }}</td><td>{{personne.email}}</td><td> Nombre de memos : {{ personne.memos | length }}</tr>
+</table>
+</div>
+</div>
+<div class="panel-body"  >
+<div class="row">
+{% for memo in paginationMemos %}
+<p style="padding-left:20px;"> Mémo cree le : {{ memo.dateCreation | date('d/M/Y h:m:s')}} =======> {{memo.contenu}}</p>
+{% endfor %}
+</div>
+<div class="input-group" >
+<div class="input-group-addon">
+{{ form_start(form) }}
+{{ form_widget(form.contenu , { 'attr' : {'placeholder': 'Votre nouveau memo içi', 'style' : ' background-color: #4682b4; color: white;'}})}}
+</div>
+<div class="input-group-addon">
+{{ form_widget(form.soumettre,{ 'attr' : {'style' : ' background-color: #4682b4; color: white;'}})}}
+</div>
+{{ form_end(form) }}
+</div>
+<div class="panel-footer"  >
+<p style="text-align : center ;">
+{% for page in 0..((personne.memos|length) /5)|round(0,'floor') %}
+	<a href={{ path('showPersonne', {'page' : page , 'id' : personne.id})}}> {{page+1}} </a>
+{% endfor %}
+</p>
+</div>
+{% endblock %}
