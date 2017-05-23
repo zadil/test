@@ -82,8 +82,10 @@ class GestionPersonneController extends Controller
     public function supSessionAction(Request $request)
     {
         
-        $this->getRequest()->getSession()->clear();
-        return $this->redirectToRoute('listerMemos', array(
+        $session = $request->getSession();
+        $session->invalidate();
+
+        return $this->redirectToRoute('listerFormation', array(
             // ...
         ));
     }
@@ -159,7 +161,7 @@ class GestionPersonneController extends Controller
             $connexion = $form->getData();
             $personne=$this->getDoctrine()->getManager()->getRepository('PersonneBundle:Personne')->findOneBy(array('email' => $connexion['email']));
            if($personne->getPassword() == $connexion['password']){
-                $session = new Session();
+                $session = $request->getSession();
                 $session->set('id', $personne->getId());
                 $session->set('nom', $personne->getNom());
                 $session->set('prenom', $personne->getPrenom());

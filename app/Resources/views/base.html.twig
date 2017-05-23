@@ -19,7 +19,7 @@
           <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home"> {{ app.session.get('nom') | upper }}  {{ app.session.get('prenom') | capitalize }}</span></a>
           <ul class="nav navbar-nav">        
               <li><a class=" white-bg"  href= {{ path('connexion') }}><span class="glyphicon glyphicon-log-in"></span></a></li>
-              <li><a class=" white-bg" href=""><span class="glyphicon glyphicon-log-out"></span></a></li>                      
+              <li><a class=" white-bg" href={{ path('supprimerSession') }}><span class="glyphicon glyphicon-log-out"></span></a></li>                      
           </ul>
       </div>      
   </nav>
